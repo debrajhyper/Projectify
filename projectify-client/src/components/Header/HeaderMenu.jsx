@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
-import { BASE_PATH, EMPLOYEE_LINK, CONTACT_US_LINK, PROJECTS_LINK, LOGIN_LINK, SIGNUP_LINK, MANAGER_LINK } from '../../routes/route';
+import { BASE_PATH, EMPLOYEE_LINK, CONTACT_US_LINK, PROJECTS_LINK, LOGIN_LINK, SIGNUP_LINK } from '../../routes/route';
 import NSElogo from '../../icon/NSE_Logo.svg';
-import HeaderMenuDropdown from './HeaderMenuDropdown';
 import HeaderMobileMenu from './HeaderMobileMenu';
 import { useDisclosure } from '@mantine/hooks';
-import { Image, createStyles, Header, HoverCard, Group, Button, Center, Box, Burger } from '@mantine/core';
-import { IconChevronDown } from '@tabler/icons';
+import { Image, createStyles, Header, HoverCard, Group, Button, Box, Burger } from '@mantine/core';
+
 // import ThemeToggle from './ThemeToggles';
 
 const useStyles = createStyles(theme => ({
@@ -46,10 +45,16 @@ const useStyles = createStyles(theme => ({
     },
 }));
 
-export default function HeaderMenu() {
+export default function HeaderMenu({isLoggedIn, setisLoggedIn}) {
     const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
     const { classes, theme } = useStyles();
 
+    const logoutHandle = () => setisLoggedIn({
+        login: false,
+        authority: ''
+    })
+    
+    console.log(isLoggedIn);
     return (
         <Box>
 
@@ -62,28 +67,26 @@ export default function HeaderMenu() {
                     </div>
 
                     <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
-                        <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
-                            <HoverCard.Target>
-                                <Link to={PROJECTS_LINK} className={classes.link}>
-                                    <Center inline>
-                                        <Box component="span" mr={5}>Projects</Box>
-                                        <IconChevronDown size={16} color={theme.fn.primaryColor()} />
-                                    </Center>
-                                </Link>
-                            </HoverCard.Target>
-                            <HeaderMenuDropdown />
-                        </HoverCard>
+                        <Link to={PROJECTS_LINK} className={classes.link}>Projects</Link>
                         <Link to={EMPLOYEE_LINK} className={classes.link}>Employee</Link>
-                        <Link to={MANAGER_LINK} className={classes.link}>Manager</Link>
+                        {/* <Link to={MANAGER_LINK} className={classes.link}>Manager</Link> */}
                         {/* <Link to={EVENTS_LINK} className={classes.link}>Events</Link> */}
                         <Link to={CONTACT_US_LINK} className={classes.link}>Contact Us</Link>
                     </Group>
 
-                    <Group className={`${classes.hiddenMobile}`}>
-                        {/* <ThemeToggle/> */}
-                        <Button component={Link} to={LOGIN_LINK} variant="outline">Log in</Button>
-                        <Button component={Link} to={SIGNUP_LINK} variant='filled'>Sign up</Button>
-                    </Group>
+                    {
+                        isLoggedIn?.login
+                        ? <Group className={`${classes.hiddenMobile}`}>
+                            {/* <ThemeToggle/> */}
+                            <Button onClick={() => logoutHandle()} variant="outline">Log out</Button>
+                        </Group>
+                        : <Group className={`${classes.hiddenMobile}`}>
+                            {/* <ThemeToggle/> */}
+                            <Button component={Link} to={LOGIN_LINK} variant="outline">Log in</Button>
+                            <Button component={Link} to={SIGNUP_LINK} variant='filled'>Sign up</Button>
+                        </Group>
+                    }
+                    
 
                     <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
                 </Group>

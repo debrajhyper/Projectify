@@ -23,7 +23,7 @@ const requirements = [
 ];
 
 function getStrength(password) {
-    let multiplier = password.length > 5 ? 0 : 1;
+    let multiplier = password?.length > 5 ? 0 : 1;
 
     requirements.forEach((requirement) => {
         if (!requirement.re.test(password)) {
@@ -31,17 +31,17 @@ function getStrength(password) {
         }
     });
 
-    return Math.max(100 - (100 / (requirements.length + 1)) * multiplier, 10);
+    return Math.max(100 - (100 / (requirements?.length + 1)) * multiplier, 10);
 }
 
-export default function PasswordRequirementInput({ label, placeholder, required, mt }) {
+export default function PasswordRequirementInput({ formValue, label, placeholder, required, mt }) {
     const [popoverOpened, setPopoverOpened] = useState(false);
-    const [value, setValue] = useState('');
+    // const [value, setValue] = useState(formValue);
     const checks = requirements.map((requirement, index) => (
-        <PasswordRequirement key={index} label={requirement.label} meets={requirement.re.test(value)} />
+        <PasswordRequirement key={index} label={requirement.label} meets={requirement.re.test(formValue?.value)} />
     ));
 
-    const strength = getStrength(value);
+    const strength = getStrength(formValue?.value);
     const color = strength === 100 ? 'teal' : strength > 50 ? 'yellow' : 'red';
 
     return (
@@ -53,20 +53,20 @@ export default function PasswordRequirementInput({ label, placeholder, required,
                         onBlurCapture={() => setPopoverOpened(false)}
                     >
                         <PasswordInput
-                            withAsterisk
                             label={label}
                             placeholder={placeholder}
-                            value={value}
                             description="Password must include at least one letter, number and special character"
-                            onChange={(event) => setValue(event.currentTarget.value)}
-                            required={required}
+                            {...formValue}
+                            // value={value}
+                            // onChange={(event) => setValue(event.currentTarget.value)}
+                            required
                             mt={mt}
                         />
                     </div>
                 </Popover.Target>
                 <Popover.Dropdown>
                     <Progress color={color} value={strength} size={5} style={{ marginBottom: 10 }} />
-                    <PasswordRequirement label="Includes at least 6 characters" meets={value.length > 5} />
+                    <PasswordRequirement label="Includes at least 6 characters" meets={formValue?.value?.length > 5} />
                     {checks}
                 </Popover.Dropdown>
             </Popover>

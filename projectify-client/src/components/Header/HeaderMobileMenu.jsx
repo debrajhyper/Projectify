@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { EMPLOYEE_LINK, CONTACT_US_LINK, LOGIN_LINK, SIGNUP_LINK, MANAGER_LINK } from '../../routes/route';
-import HeaderMenuSub from "./HeaderMenuSub";
 import { useDisclosure } from '@mantine/hooks';
 import { createStyles, Drawer, ScrollArea, Divider, UnstyledButton, Center, Box, Collapse, Group, Button } from "@mantine/core";
 import { IconChevronDown } from '@tabler/icons';
@@ -52,9 +51,8 @@ const HeaderMobileMenu = ({drawerOpened, closeDrawer}) => {
                         <IconChevronDown size={16} color={theme.fn.primaryColor()} />
                     </Center>
                 </UnstyledButton>
-                <Collapse in={linksOpened}><HeaderMenuSub /></Collapse>
                 <Link to={EMPLOYEE_LINK} className={classes.link}>Employee</Link>
-                <Link to={MANAGER_LINK} className={classes.link}>Manager</Link>
+                {/* <Link to={MANAGER_LINK} className={classes.link}>Manager</Link> */}
                 {/* <Link to={EVENTS_LINK} className={classes.link}>Events</Link> */}
                 <Link to={CONTACT_US_LINK} className={classes.link}>Contact Us</Link>
                 <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />

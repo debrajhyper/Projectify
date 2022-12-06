@@ -1,9 +1,10 @@
-import { Card, Image, Text, Group, Badge, createStyles, Center, Button } from '@mantine/core';
-import { IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler/icons';
+import { Avatar, Flex, Card, Image, Text, Group, Badge, createStyles, Center, Button, ActionIcon } from '@mantine/core';
+import { IconCurrencyRupee , IconComponents , IconBuildingArch , IconMapPin , IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler/icons';
+import img from '../../image/project/1.png';
 
 const useStyles = createStyles((theme) => ({
   card: {
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.indigo[0],
   },
 
   imageSection: {
@@ -39,10 +40,10 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const mockdata = [
-  { label: '4 passengers', icon: IconUsers },
-  { label: '100 km/h in 4 seconds', icon: IconGauge },
-  { label: 'Automatic gearbox', icon: IconManualGearbox },
-  { label: 'Electric', icon: IconGasStation },
+  { label: '40 Employee', icon: IconUsers },
+  { label: 'Think & corporation ltd.', icon: IconBuildingArch  },
+  { label: 'Block Chain', icon: IconComponents  },
+  { label: '20,000', icon: IconCurrencyRupee  },
 ];
 
 export default function ProjectCard() {
@@ -56,40 +57,37 @@ export default function ProjectCard() {
 
   return (
     <Card withBorder radius="md" className={`${classes.card} text-left`}>
-
+      <Group>
+        <div className='flex flex-row justify-between items-center w-full'>
+          <Avatar src={img} />
+          <Text fz='small' c="dimmed">7 July 2020</Text>
+        </div>
+      </Group>
       <Group position="apart" mt="md">
         <div>
-          <Text weight={500}>Tesla Model S</Text>
-          <Text size="xs" color="dimmed">
-            Free recharge at any station
-          </Text>
+          <Text size='xl' weight={700}>UX Designer</Text>
+          <Flex justify='start' align="center">
+          <ActionIcon size='xs'><IconMapPin /></ActionIcon>
+          <Text size="xs" color="dimmed">London,UK</Text>
+          </Flex>
         </div>
-        <Badge variant="outline">25% off</Badge>
+        <Badge variant="outline">20 applied</Badge>
       </Group>
 
       <Card.Section className={classes.section} mt="md">
         <Text size="sm" color="dimmed" className={classes.label}>
-          Basic configuration
+          Basic Information
         </Text>
 
-        <Group spacing={8} mb={-8}>
+        <Group spacing={10} mb={-8}>
           {features}
         </Group>
       </Card.Section>
 
       <Card.Section className={classes.section}>
-        <Group spacing={30}>
-          <div>
-            <Text size="xl" weight={700} sx={{ lineHeight: 1 }}>
-              $168.00
-            </Text>
-            <Text size="sm" color="dimmed" weight={500} sx={{ lineHeight: 1 }} mt={3}>
-              per day
-            </Text>
-          </div>
-
+        <Group grow>
           <Button radius="xl" style={{ flex: 1 }}>
-            Rent now
+            Apply now
           </Button>
         </Group>
       </Card.Section>
