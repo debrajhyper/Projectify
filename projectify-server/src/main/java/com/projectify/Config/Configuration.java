@@ -1,4 +1,4 @@
-package com.projectify.config;
+package com.projectify.Config;
 
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
