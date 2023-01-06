@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class JwtRequest {
-	Integer usercode;
+	String username;
 	String password;
 }
