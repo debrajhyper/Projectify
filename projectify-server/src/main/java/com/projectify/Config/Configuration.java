@@ -14,13 +14,14 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@SuppressWarnings("deprecation")
 @EnableWebSecurity
 @org.springframework.context.annotation.Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class Configuration extends WebSecurityConfigurerAdapter {
 	
 	private String[] allowedUrls = {
-			"/home", "/generate-token", "/send-otp", "/verify-otp", "/reset-password", "/register", "/upload/{imageName}"
+			"/home", "/generate-token", "/send-otp", "/verify-otp", "/reset-password", "/register-admin", "/register", "/upload/{imageName}"
 	};
 	
 	@Autowired

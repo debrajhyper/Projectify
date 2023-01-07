@@ -2,7 +2,11 @@ package com.projectify.Constant;
 
 public class MessageConstant {
 	
-	public static final String REGISTER_USER_SUCCESS = "User successfully registered";
+	public static final String REGISTER_ADMIN_SUCCESS = "Admin successfully registered";
+	
+	public static final String REGISTER_MANAGER_SUCCESS = "Manager successfully registered";
+	
+	public static final String REGISTER_EMPLOYEE_SUCCESS = "Employee successfully registered";
 	
 	public static final String UPDATE_USER_SUCCESS = "User updated successfully";
 	

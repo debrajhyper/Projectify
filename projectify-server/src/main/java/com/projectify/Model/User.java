@@ -21,10 +21,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.Data;
 
-
-@Data
 @Entity
 @Table(name = "user_total")
 public class User implements UserDetails {
@@ -37,41 +34,131 @@ public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@NotBlank(message = "First Name field is required")
 	private String firstName;
-	
+
 	private String middleName;
-	
+
 	@NotBlank(message = "Last Name field is required")
 	private String lastName;
-	
+
 	private int employeeCode;
-	
+
 	@Column(unique = true)
 	@NotBlank(message = "Email address is required")
 	@Email(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
 	private String email;
-	
+
 	@NotBlank(message = "Password is required")
 	private String password;
-	
+
 	private String image;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<UserRole> userRoles = new HashSet<>();
 
+	public User(int id, @NotBlank(message = "First Name field is required") String firstName, String middleName,
+			@NotBlank(message = "Last Name field is required") String lastName, int employeeCode,
+			@NotBlank(message = "Email address is required") @Email(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$") String email,
+			@NotBlank(message = "Password is required") String password, String image, Set<UserRole> userRoles) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.employeeCode = employeeCode;
+		this.email = email;
+		this.password = password;
+		this.image = image;
+		this.userRoles = userRoles;
+	}
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public int getEmployeeCode() {
+		return employeeCode;
+	}
+
+	public void setEmployeeCode(int employeeCode) {
+		this.employeeCode = employeeCode;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public Set<UserRole> getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(Set<UserRole> userRoles) {
+		this.userRoles = userRoles;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
+	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
 		Set<Authority> authorities = new HashSet<>();
-		
+
 		this.userRoles.forEach(userRole -> {
 			authorities.add(new Authority(userRole.getRole().getRoleName()));
 		});
-		
+
 		return authorities;
 	}
 
@@ -90,7 +177,7 @@ public class User implements UserDetails {
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -110,5 +197,5 @@ public class User implements UserDetails {
 		// TODO Auto-generated method stub
 		return password;
 	}
-	
+
 }
