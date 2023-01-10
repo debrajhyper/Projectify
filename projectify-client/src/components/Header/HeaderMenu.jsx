@@ -83,7 +83,7 @@ export default function HeaderMenu({isLoggedIn, setisLoggedIn}) {
                         : <Group className={`${classes.hiddenMobile}`}>
                             {/* <ThemeToggle/> */}
                             <Button component={Link} to={LOGIN_LINK} variant="outline">Log in</Button>
-                            <Button component={Link} to={SIGNUP_LINK} variant='filled'>Sign up</Button>
+                            {/* <Button component={Link} to={SIGNUP_LINK} variant='filled'>Sign up</Button> */}
                         </Group>
                     }
                     

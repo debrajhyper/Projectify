@@ -8,7 +8,11 @@ public class MessageConstant {
 	
 	public static final String REGISTER_EMPLOYEE_SUCCESS = "Employee successfully registered";
 	
-	public static final String UPDATE_USER_SUCCESS = "User updated successfully";
+	public static final String UPDATE_ADMIN_SUCCESS = "Admin updated successfully";
+	
+	public static final String UPDATE_MANAGER_SUCCESS = "Manager updated successfully";
+	
+	public static final String UPDATE_EMPLOYEE_SUCCESS = "Employee updated successfully";
 	
 	public static final String LOGOUT_USER_SUCCESS = "User successfully logged out";
 	

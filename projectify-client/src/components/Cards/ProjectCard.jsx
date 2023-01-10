@@ -60,15 +60,15 @@ export default function ProjectCard() {
       <Group>
         <div className='flex flex-row justify-between items-center w-full'>
           <Avatar src={img} />
-          <Text fz='small' c="dimmed">7 July 2020</Text>
+          <Text fz='small' c="dimmed" className='created-date'>7 July 2020</Text>
         </div>
       </Group>
       <Group position="apart" mt="md">
         <div>
-          <Text size='xl' weight={700}>UX Designer</Text>
+          <Text size='xl' weight={700} className='project-title'>UDX Delevery</Text>
           <Flex justify='start' align="center">
-          <ActionIcon size='xs'><IconMapPin /></ActionIcon>
-          <Text size="xs" color="dimmed">London,UK</Text>
+            <ActionIcon size='xs'><IconMapPin /></ActionIcon>
+            <Text size="xs" color="dimmed">London,UK</Text>
           </Flex>
         </div>
         <Badge variant="outline">20 applied</Badge>

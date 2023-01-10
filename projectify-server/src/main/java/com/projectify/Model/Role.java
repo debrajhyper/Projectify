@@ -1,8 +1,7 @@
 package com.projectify.Model;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,58 +11,26 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "roles")
 public class Role {
 	
 	@Id
-	private Integer roleId;
+	private int roleId;
 	
 	private String roleName;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<UserRole> userRoles = new HashSet<>();
-
-	public Role(Integer roleId, String roleName, Set<UserRole> userRoles) {
-		super();
-		this.roleId = roleId;
-		this.roleName = roleName;
-		this.userRoles = userRoles;
-	}
-
-	public Role() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Integer getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(Integer roleId) {
-		this.roleId = roleId;
-	}
-
-	public String getRoleName() {
-		return roleName;
-	}
-
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
-
-	public Set<UserRole> getUserRoles() {
-		return userRoles;
-	}
-
-	public void setUserRoles(Set<UserRole> userRoles) {
-		this.userRoles = userRoles;
-	}
-
-	@Override
-	public String toString() {
-		return "Role [roleId=" + roleId + ", roleName=" + roleName + ", userRoles=" + userRoles + "]";
-	}
+	private List<UserRole> userRoles = new ArrayList<>();
 
 }

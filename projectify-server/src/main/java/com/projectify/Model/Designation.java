@@ -2,33 +2,29 @@ package com.projectify.Model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "user_role")
-public class UserRole {
-
+public class Designation {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int userRoleId;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	private User user;
-
-	@ManyToOne
-	private Role role;
-
+	private int id;
+	
+	private String shortDesignation;
+	
+	@Column(name = "designation_title", unique = true)
+	private String designation;
+	
 }

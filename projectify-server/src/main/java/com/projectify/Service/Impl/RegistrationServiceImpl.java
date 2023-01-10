@@ -1,7 +1,6 @@
 package com.projectify.Service.Impl;
 
-import java.util.Set;
-
+import java.util.List;
 import javax.persistence.EntityExistsException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.projectify.Constant.AppConstant;
 import com.projectify.Constant.ExceptionConstant;
+import com.projectify.Model.Admin;
 import com.projectify.Model.User;
 import com.projectify.Model.UserRole;
 import com.projectify.Repository.RoleRepository;
@@ -25,22 +25,23 @@ public class RegistrationServiceImpl implements RegistrationService {
 	private RoleRepository roleRepository;
 
 	@Override
-	public void registerAdmin(User user, Set<UserRole> userRoles) throws Exception {
+	public void registerAdmin(User user, List<UserRole> userRoles) throws Exception {
 		// TODO Auto-generated method stub
 		try {
 			User dbUser = userRepository.findByUserName(user.getEmail());
-
 			if (dbUser != null) {
 				throw new EntityExistsException("Admin already exists with this email address");
 			} 
 			else {
-
 				for (UserRole userRole : userRoles) {
 					roleRepository.save(userRole.getRole());
 				}
 				
-				user.setImage(AppConstant.DEFAULT_IMAGE);
 				user.getUserRoles().addAll(userRoles);
+				Admin admin = new Admin();
+					admin.setImage(AppConstant.DEFAULT_IMAGE);
+					admin.setUser(user);
+				user.setAdmin(admin);
 
 				this.userRepository.save(user);
 				System.out.println("SUCCESS =================== > REGISTERED ADMIN -> EMAIL : " + user.getEmail());
@@ -61,7 +62,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 	}
 
 	@Override
-	public void registerManager(User user, Set<UserRole> userRoles) throws Exception {
+	public void registerManager(User user, List<UserRole> userRoles) throws Exception {
 		// TODO Auto-generated method stub
 		try {
 			User dbUser = userRepository.findByUserName(user.getEmail());
@@ -75,7 +76,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 					roleRepository.save(userRole.getRole());
 				}
 				
-				user.setImage(AppConstant.DEFAULT_IMAGE);
+//				user.setImage(AppConstant.DEFAULT_IMAGE);
 				user.getUserRoles().addAll(userRoles);
 
 				this.userRepository.save(user);
@@ -97,7 +98,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 	}
 
 	@Override
-	public void registerEmployee(User user, Set<UserRole> userRoles) throws Exception {
+	public void registerEmployee(User user, List<UserRole> userRoles) throws Exception {
 		// TODO Auto-generated method stub
 		try {
 			User dbUser = userRepository.findByUserName(user.getEmail());
@@ -111,7 +112,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 					roleRepository.save(userRole.getRole());
 				}
 				
-				user.setImage(AppConstant.DEFAULT_IMAGE);
+//				user.setImage(AppConstant.DEFAULT_IMAGE);
 				user.getUserRoles().addAll(userRoles);
 
 				this.userRepository.save(user);

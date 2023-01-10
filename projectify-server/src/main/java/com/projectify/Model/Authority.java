@@ -19,7 +19,7 @@ public class Authority implements GrantedAuthority {
 	@Override
 	public String getAuthority() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.authority;
 	}
 
 	@Override
