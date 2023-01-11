@@ -2,13 +2,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { DASHBOARD_LINK, FORGOT_PASSWORD_LINK, SIGNUP_LINK } from '../../routes/route';
 import { TextInput, NumberInput, Select, PasswordInput, Checkbox, Anchor, Paper, Title, Text, Container, Group, Button } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import axios from 'axios';
-import { EMPLOYEE_BASE_URL, LOGIN_URL, MANAGER_BASE_URL } from '../../api/url';
+import axios, { GENERATE_TOKEN } from '../../api/api';
+// import { EMPLOYEE_BASE_URL, LOGIN_URL, MANAGER_BASE_URL } from '../../api/url';
 import { errorNotification, loadingNotification, successNotification } from '../../components';
 import { request } from '../../utils/baseAxios';
 import { loginRequest } from '../../utils/authResquest';
 import { useMutation, useQuery } from 'react-query';
-
+import { setToken } from '../../utils/localstorageItem';
 // const loginRequest = credentials => {
 //     return request({
 //         url: '/generate-token',
@@ -36,9 +36,9 @@ export default function LoginPage({setisLoggedIn}) {
     //         enabled: false,
     //     }
     // )
-    const { isLoading, data, isError, error, isFetching, mutateAsync } = useMutation('auth-login', loginRequest)
-    console.log(data)
-    console.log(error)
+    // const { isLoading, data, isError, error, isFetching, mutateAsync } = useMutation('auth-login', loginRequest)
+    // console.log(data)
+    // console.log(error)
     const form = useForm({
         initialValues: {
             email: '',
@@ -47,14 +47,22 @@ export default function LoginPage({setisLoggedIn}) {
     });
 
     const formSubmit = values => {
-        loadingNotification()
-        console.log(values);
-            mutateAsync({
-                username: values.email,
-                password: values.password
-            })
+        // loadingNotification()
+        const credentials = {
+            username: values.email,
+            password: values.password
+        }
+        axios.post(GENERATE_TOKEN, credentials)
+        .then(res => {
+            console.log(res.data);
+            const isLoggedIn = setToken(res.data.token);
+            if(isLoggedIn) navigate(DASHBOARD_LINK);
+        })
+        .catch(err => {
+            console.log(err)
+            errorNotification(err.response.data.message || err.message)
+        })
 
-        
 
         // if(values.authority === 'employee') {
         //     axios.post(EMPLOYEE_BASE_URL+LOGIN_URL, values)

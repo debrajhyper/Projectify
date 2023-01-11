@@ -1,5 +1,5 @@
 import { Avatar, Flex, Card, Image, Text, Group, Badge, createStyles, Center, Button, ActionIcon } from '@mantine/core';
-import { IconCurrencyRupee , IconComponents , IconBuildingArch , IconMapPin , IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler/icons';
+import { IconCurrencyRupee, IconUserPlus, IconComponents , IconBuildingArch , IconMapPin , IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler/icons';
 import img from '../../image/project/1.png';
 
 const useStyles = createStyles((theme) => ({
@@ -41,9 +41,8 @@ const useStyles = createStyles((theme) => ({
 
 const mockdata = [
   { label: '40 Employee', icon: IconUsers },
-  { label: 'Think & corporation ltd.', icon: IconBuildingArch  },
-  { label: 'Block Chain', icon: IconComponents  },
-  { label: '20,000', icon: IconCurrencyRupee  },
+  { label: 'Web development', icon: IconComponents  },
+  { label: '1.5 years', icon: IconUserPlus  },
 ];
 
 export default function ProjectCard() {
@@ -57,16 +56,17 @@ export default function ProjectCard() {
 
   return (
     <Card withBorder radius="md" className={`${classes.card} text-left`}>
-      <Group>
+      <Group position='apart' grow>
         <div className='flex flex-row justify-between items-center w-full'>
           <Avatar src={img} />
           <Text fz='small' c="dimmed" className='created-date'>7 July 2020</Text>
         </div>
       </Group>
+
       <Group position="apart" mt="md">
         <div>
-          <Text size='xl' weight={700} className='project-title'>UDX Delevery</Text>
-          <Flex justify='start' align="center">
+          <Text size='xl' weight={700}>Delevery</Text>
+          <Flex>
             <ActionIcon size='xs'><IconMapPin /></ActionIcon>
             <Text size="xs" color="dimmed">London,UK</Text>
           </Flex>

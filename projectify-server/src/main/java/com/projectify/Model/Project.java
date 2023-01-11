@@ -28,8 +28,6 @@ public class Project {
 	
 	private String title;
 	
-	private String designation;
-	
 	private String location;
 	
 	private int requiredEmployee;

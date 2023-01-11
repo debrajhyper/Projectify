@@ -4,7 +4,7 @@ import PasswordRequirementInput from "../Form/PasswordRequirementInput";
 import { useForm } from '@mantine/form';
 import { TextInput, Anchor, Button, Text, NumberInput } from "@mantine/core";
 import axios from "axios";
-import { MANAGER_BASE_URL } from "../../api/url";
+// import { MANAGER_BASE_URL } from "../../api/url";
 import { loadingNotification, successNotification,errorNotification } from "../Notification/Notification";
 
 const ManagerSignup = () => {
@@ -27,15 +27,15 @@ const ManagerSignup = () => {
   const formSubmit = values => {
     console.log(values)
     loadingNotification()
-    axios.post(MANAGER_BASE_URL, values)
-    .then(res => {
-        console.log(res)
-        successNotification(res.data.message)
-    })
-    .catch(err => {
-        console.log(err)
-        errorNotification(err.response.data || err.response.data.error || err.message)
-    })
+    // axios.post(MANAGER_BASE_URL, values)
+    // .then(res => {
+    //     console.log(res)
+    //     successNotification(res.data.message)
+    // })
+    // .catch(err => {
+    //     console.log(err)
+    //     errorNotification(err.response.data || err.response.data.error || err.message)
+    // })
   }
 
   return (

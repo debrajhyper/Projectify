@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
-import { EMPLOYEE_BASE_URL } from "../../api/url";
+// import { EMPLOYEE_BASE_URL } from "../../api/url";
 import { errorNotification, loadingNotification, successNotification } from "../../components";
 import { Container, Grid, Divider, Checkbox, Select, SimpleGrid, Text, Skeleton, useMantineTheme, Flex, Image, Center } from '@mantine/core';
 import { EmployeeCard } from "../../components";
@@ -8,20 +8,20 @@ import { EmployeeCard } from "../../components";
 const EmployeePage = () => {
   const [employee, seEmployee] = useState([]);
 
-  useEffect(() => {
-    loadingNotification()
-    axios.get(`${EMPLOYEE_BASE_URL}/`)
-    .then(res => {
-      console.log(res.data.data)
-      seEmployee(res.data.data)
-      successNotification(res.data.message)
-    })
-    .catch(err => {
-      console.log(err);
-      errorNotification(err.message)
-    })
+  // useEffect(() => {
+  //   loadingNotification()
+  //   axios.get(`${EMPLOYEE_BASE_URL}/`)
+  //   .then(res => {
+  //     console.log(res.data.data)
+  //     seEmployee(res.data.data)
+  //     successNotification(res.data.message)
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //     errorNotification(err.message)
+  //   })
 
-  }, [])
+  // }, [])
   
   return (
     <Center>

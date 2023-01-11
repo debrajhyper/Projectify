@@ -5,7 +5,7 @@ import { useForm } from '@mantine/form';
 import { Select, FileInput, Group, TextInput, Anchor, Button, Text } from "@mantine/core";
 import { IconUpload } from '@tabler/icons';
 import axios from "axios";
-import { EMPLOYEE_BASE_URL, REGISTER_URL } from "../../api/url";
+// import { EMPLOYEE_BASE_URL, REGISTER_URL } from "../../api/url";
 import { loadingNotification, successNotification,errorNotification } from "../Notification/Notification";
 
 const EmployeeSignup = () => {
@@ -27,15 +27,15 @@ const EmployeeSignup = () => {
     const formSubmit = values => {
         console.log(values)
         loadingNotification()
-        axios.post(EMPLOYEE_BASE_URL+REGISTER_URL, values)
-        .then(res => {
-            console.log(res)
-            successNotification(res.data.message)
-        })
-        .catch(err => {
-            console.log(err)
-            errorNotification(err.response.data || err.response.data.error || err.message)
-        })
+        // axios.post(EMPLOYEE_BASE_URL+REGISTER_URL, values)
+        // .then(res => {
+        //     console.log(res)
+        //     successNotification(res.data.message)
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        //     errorNotification(err.response.data || err.response.data.error || err.message)
+        // })
     }
 
     return (

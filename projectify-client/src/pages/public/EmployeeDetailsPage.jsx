@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { EMPLOYEE_BASE_URL } from '../../api/url';
+// import { EMPLOYEE_BASE_URL } from '../../api/url';
 import axios from 'axios';
 import { errorNotification, loadingNotification, successNotification } from '../../components';
 import { Avatar, Text, Button, Paper, Center } from '@mantine/core';
@@ -9,20 +9,20 @@ const EmployeeDetailsPage = () => {
     const [employee, setEmployee] = useState({});
     const { eId } = useParams();
 
-    useEffect(() => {
-        loadingNotification()
-        axios.get(`${EMPLOYEE_BASE_URL}/${eId}`)
-        .then(res => {
-            console.log(res.data.data);
-            setEmployee(res.data.data)
-            successNotification(res.data.message)
-        })
-        .catch(err => {
-            console.log(err);
-            errorNotification(err.response.data.message || err.message)
-        })
+    // useEffect(() => {
+    //     loadingNotification()
+    //     axios.get(`${EMPLOYEE_BASE_URL}/${eId}`)
+    //     .then(res => {
+    //         console.log(res.data.data);
+    //         setEmployee(res.data.data)
+    //         successNotification(res.data.message)
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //         errorNotification(err.response.data.message || err.message)
+    //     })
 
-    }, [])
+    // }, [])
     
     const { empProfilePhotoUrl, employeeContact, employeeCurrentProjects, employeeDoj, employeeEducations, employeeExperiences, employeeFirstName, employeeLastName, employeeGender, employeeProjectApplications, employeeSkills } = employee;
     return (
