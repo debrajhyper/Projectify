@@ -3,11 +3,11 @@ import { IconHighlight, IconUser, IconUserCircle } from '@tabler/icons';
 import { useState } from 'react'
 import { createStyles, Text, UnstyledButton, Anchor, Group } from '@mantine/core';
 import { Link } from 'react-router-dom';
-import { ADD_EMPLOYEE_LINK, ADD_MANAGER_LINK, ADD_SKILL_LINK } from '../../../routes/route';
+import { ADD_SKILL_LINK, CREATE_EMPLOYEE_LINK, CREATE_MANAGER_LINK } from '../../../routes/route';
 
 const mockdata = [
-  { title: 'Add Manager', icon: IconUserCircle, color: 'dark', href: ADD_MANAGER_LINK },
-  { title: 'Add Employee', icon: IconUser, color: 'dark', href: ADD_EMPLOYEE_LINK },
+  { title: 'Create Manager', icon: IconUserCircle, color: 'dark', href: CREATE_MANAGER_LINK },
+  { title: 'Create Employee', icon: IconUser, color: 'dark', href: CREATE_EMPLOYEE_LINK },
   { title: 'Add Skills', icon: IconHighlight, color: 'dark', href: ADD_SKILL_LINK }
 ];
 
@@ -53,7 +53,7 @@ const AdminDashboardPage = () => {
   ));
 
   return (
-    <Container size="xs" px="xs" mt='xl'>
+    <Container size="xs" px="xs" my={150}>
       <Card p="xl" className={classes.card}>
         <Group position="apart">
           <Text className={classes.title}>Welcome to Admin Page</Text>

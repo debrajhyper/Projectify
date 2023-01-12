@@ -3,13 +3,13 @@ export { default as SignupPage } from './auth/SignupPage';
 export { default as ForgotPasswordPage } from './auth/ForgotPasswordPage';
 
 export { default as AdminDashboardPage } from './private/admin/AdminDashboardPage';
-export { default as AddManagerPage } from './private/admin/AddManagerPage';
-export { default as AddEmployeePage } from './private/admin/AddEmployeePage';
+export { default as CreateManagerPage } from './private/admin/CreateManagerPage';
+export { default as CreateEmployeePage } from './private/admin/CreateEmployeePage';
 export { default as AddSkillPage } from './private/admin/AddSkillPage';
 
 export { default as ManagerDashboardPage } from './private/manager/ManagerDashboardPage';
-export { default as AddProjectPage } from './private/manager/AddProjectPage';
-export { default as ProjectCreatedPage } from './private/manager/ProjectsCreatedPage';
+export { default as CreateProjectPage } from './private/manager/CreateProjectPage';
+export { default as CreatedProjectsPage } from './private/manager/CreatedProjectsPage';
 
 export { default as EmployeeDashboardPage } from './private/employee/EmployeeDashboardPage';
 

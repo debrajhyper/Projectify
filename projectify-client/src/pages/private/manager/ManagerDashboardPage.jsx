@@ -3,11 +3,11 @@ import { IconHighlight, IconFiles, IconFilePlus } from '@tabler/icons';
 import { useState } from 'react'
 import { createStyles, Text, UnstyledButton, Anchor, Group } from '@mantine/core';
 import { Link } from 'react-router-dom';
-import { ADD_EMPLOYEE_LINK, ADD_MANAGER_LINK, ADD_PROJECT_LINK, ADD_SKILL_LINK, PROJECT_CREATED_LINK } from '../../../routes/route';
+import { ADD_EMPLOYEE_LINK, ADD_MANAGER_LINK, ADD_PROJECT_LINK, ADD_SKILL_LINK, CREATED_PROJECTS_LINK, CREATE_PROJECT_LINK, PROJECT_CREATED_LINK } from '../../../routes/route';
 
 const mockdata = [
-  { title: 'Add Project', icon: IconFilePlus, color: 'dark', href: ADD_PROJECT_LINK },
-  { title: 'Projects Created', icon: IconFiles, color: 'dark', href: PROJECT_CREATED_LINK },
+  { title: 'Create Project', icon: IconFilePlus, color: 'dark', href: CREATE_PROJECT_LINK },
+  { title: 'Created Projects', icon: IconFiles, color: 'dark', href: CREATED_PROJECTS_LINK },
 ];
 
 const useStyles = createStyles((theme) => ({
@@ -52,7 +52,7 @@ const ManagerDashboardPage = () => {
   ));
 
   return (
-    <Container size="xs" px="xs" mt='xl'>
+    <Container size="xs" px="xs" mt={150}>
       <Card p="xl" className={classes.card}>
         <Group position="apart">
           <Text className={classes.title}>Welcome to Manager Page</Text>

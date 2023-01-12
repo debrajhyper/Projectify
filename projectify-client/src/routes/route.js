@@ -15,13 +15,13 @@ export const FORGOT_PASSWORD_PATH = 'forgot'
 export const DASHBOARD_PATH = 'dashboard'
 
 export const ADMIN_DASHBOARD_PATH = 'admin-dashboard'
-export const ADD_MANAGER_PATH = 'add-manager'
-export const ADD_EMPLOYEE_PATH = 'add-employee'
+export const CREATE_MANAGER_PATH = 'create-manager'
+export const CREATE_EMPLOYEE_PATH = 'create-employee'
 export const ADD_SKILL_PATH = 'add-skill'
 
 export const MANAGER_DASHBOARD_PATH = 'manager-dashboard'
-export const ADD_PROJECT_PATH = 'add-project'
-export const PROJECTS_CREATED_PATH = 'projects-created'
+export const CREATE_PROJECT_PATH = 'create-project'
+export const CREATED_PROJECTS_PATH = 'created-projects'
 
 export const EMPLOYEE_DASHBOARD_PATH = 'employee-dashboard'
 
@@ -39,13 +39,13 @@ export const FORGOT_PASSWORD_LINK = '/forgot'
 export const DASHBOARD_LINK = '/dashboard'
 
 export const ADMIN_DASHBOARD_LINK = '/admin-dashboard'
-export const ADD_EMPLOYEE_LINK = '/add-employee'
-export const ADD_MANAGER_LINK = '/add-manager'
+export const CREATE_EMPLOYEE_LINK = '/create-employee'
+export const CREATE_MANAGER_LINK = '/create-manager'
 export const ADD_SKILL_LINK = '/add-skill'
 
 export const MANAGER_DASHBOARD_LINK = '/manager-dashboard'
-export const ADD_PROJECT_LINK = '/add-project'
-export const PROJECT_CREATED_LINK = '/projects-created'
+export const CREATE_PROJECT_LINK = '/create-project'
+export const CREATED_PROJECTS_LINK = '/created-projects'
 
 
 export const EMPLOYEE_DASHBOARD_LINK = '/employee-dashboard'
