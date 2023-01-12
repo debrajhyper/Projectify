@@ -3,6 +3,9 @@ export { default as SignupPage } from './auth/SignupPage';
 export { default as ForgotPasswordPage } from './auth/ForgotPasswordPage';
 
 export { default as AdminDashboardPage } from './private/admin/AdminDashboardPage';
+export { default as AddManagerPage } from './private/admin/AddManagerPage';
+export { default as AddEmployeePage } from './private/admin/AddEmployeePage';
+export { default as AddSkillPage } from './private/admin/AddSkillPage';
 
 export { default as ManagerDashboardPage } from './private/manager/ManagerDashboardPage';
 

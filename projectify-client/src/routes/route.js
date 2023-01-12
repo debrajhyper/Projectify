@@ -15,7 +15,13 @@ export const FORGOT_PASSWORD_PATH = 'forgot'
 export const DASHBOARD_PATH = 'dashboard'
 
 export const ADMIN_DASHBOARD_PATH = 'admin-dashboard'
+export const ADD_MANAGER_PATH = 'add-manager'
+export const ADD_EMPLOYEE_PATH = 'add-employee'
+export const ADD_SKILL_PATH = 'add-skill'
+
 export const MANAGER_DASHBOARD_PATH = 'manager-dashboard'
+
+
 export const EMPLOYEE_DASHBOARD_PATH = 'employee-dashboard'
 
 
@@ -32,5 +38,11 @@ export const FORGOT_PASSWORD_LINK = '/forgot'
 export const DASHBOARD_LINK = '/dashboard'
 
 export const ADMIN_DASHBOARD_LINK = '/admin-dashboard'
+export const ADD_EMPLOYEE_LINK = '/add-employee'
+export const ADD_MANAGER_LINK = '/add-manager'
+export const ADD_SKILL_LINK = '/add-skill'
+
 export const MANAGER_DASHBOARD_LINK = '/manager-dashboard'
+
+
 export const EMPLOYEE_DASHBOARD_LINK = '/employee-dashboard'
