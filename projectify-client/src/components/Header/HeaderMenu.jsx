@@ -5,6 +5,7 @@ import HeaderMobileMenu from './HeaderMobileMenu';
 import { useDisclosure } from '@mantine/hooks';
 import { Image, createStyles, Header, HoverCard, Group, Button, Box, Burger } from '@mantine/core';
 import { getToken, removeToken } from '../../utils/localstorageItem';
+import useAuth from '../../hooks/useAuth';
 
 // import ThemeToggle from './ThemeToggles';
 
@@ -50,10 +51,12 @@ export default function HeaderMenu({isLoggedIn, setisLoggedIn}) {
     const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
     const { classes, theme } = useStyles();
     const navigate = useNavigate();
+    const { auth, setAuth } = useAuth();
 
 
     const logoutHandle = () => {
         removeToken();
+        setAuth({})
         navigate(LOGIN_LINK);
     }
     

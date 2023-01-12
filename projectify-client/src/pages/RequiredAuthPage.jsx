@@ -11,12 +11,17 @@ const RequiredAuthPage = ({ allowedRoles }) => {
     const token = getToken();
     const { auth } = useAuth();
 
-    // useEffect(() => {
-    //     axiosPrivate.get(CURRENT_USER)
-    //     .then(res => {
-    //         console.log(res.data)
-    //     })
-    // }, [token])
+    useEffect(() => {
+        if(auth?.isLoggedIn) {
+            axiosPrivate.get(CURRENT_USER)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        }
+    }, [auth?.isLoggedIn])
 
     // useEffect(() => {
     //     if(isLoggedIn) {
@@ -33,7 +38,7 @@ const RequiredAuthPage = ({ allowedRoles }) => {
     
     console.log(auth);
     return ( 
-        token && auth?.roles?.find(role => allowedRoles?.includes(role?.authority))?.authority
+        auth?.isLoggedIn && auth?.roles?.find(role => allowedRoles?.includes(role?.authority))?.authority
         ? <Outlet /> 
         : auth?.email
             ? <Navigate to={UNAUTHORIZED_LINK} state={{ from: location }} replace />

@@ -25,7 +25,7 @@ export default function LoginPage({setisLoggedIn}) {
     const navigate = useNavigate();
     const location = useLocation();
     
-    const from = location.state?.form?.pathname || '/';
+    const comeFrom = location.state?.form?.pathname || '/';
     
     useEffect(() => {
         const goToPage = auth?.roles?.[0]?.authority
@@ -39,29 +39,10 @@ export default function LoginPage({setisLoggedIn}) {
             navigate(EMPLOYEE_DASHBOARD_LINK, { replace: true })
         }
         // else {
-        //     navigate(form, { replace: true })
+        //     navigate(comeFrom, { replace: true })
         // }
     }, [auth, navigate])
-    
-    // const onSuccess = () => {
-    //     console.log("success")
-    // }
-    // const onError = () => {
-    //     console.log("Error");
-    // }
 
-    // const { isLoading, data, isError, error, isFetching, refetch } = useQuery(
-    //     'auth-login',
-    //     loginRequest,
-    //     {
-    //         onSuccess,
-    //         onError,
-    //         enabled: false,
-    //     }
-    // )
-    // const { isLoading, data, isError, error, isFetching, mutateAsync } = useMutation('auth-login', loginRequest)
-    // console.log(data)
-    // console.log(error)
     const form = useForm({
         initialValues: {
             email: '',
@@ -70,7 +51,7 @@ export default function LoginPage({setisLoggedIn}) {
     });
 
     const formSubmit = async (values) => {
-        // loadingNotification()
+        loadingNotification()
         const credentials = {
             username: values.email,
             password: values.password
@@ -82,57 +63,12 @@ export default function LoginPage({setisLoggedIn}) {
             const roles = jwtDecode(res.data.token).roles;
             const email = jwtDecode(res.data.token).sub;
             console.log(jwtDecode(res.data.token).sub, jwtDecode(res.data.token).roles[0].authority);
-            setAuth({email, roles, isLoggedIn})
-            
-            // if(isLoggedIn) navigate(DASHBOARD_LINK);
+            setAuth({email, roles, isLoggedIn}) 
         })
         .catch(err => {
             console.log(err)
-            errorNotification(err?.response?.data?.message || err.message)
+            errorNotification(err?.response?.data?.message || 'Oops... Something went wrong')
         })
-
-
-        // if(values.authority === 'employee') {
-        //     axios.post(EMPLOYEE_BASE_URL+LOGIN_URL, values)
-        //     .then(res => {
-        //         console.log(res)
-        //         successNotification(res.data)
-        //         setisLoggedIn({
-        //             login: true,
-        //             authority: 'employee'
-        //         });
-        //         // if(res.status === 200) {
-        //         //     localStorage.setItem('isLoggedIn', true);
-        //         //     localStorage.setItem('authority', 'employee')
-        //         // }
-        //         navigate(DASHBOARD_LINK);
-        //     })
-        //     .catch(err => {
-        //         console.log(err)
-        //         errorNotification(err.response.data || err.response.data.error || err.message)
-        //     })
-        // } else if(values.authority === 'admin') {
-        //     axios.post(MANAGER_BASE_URL+LOGIN_URL, values)
-        //     .then(res => {
-        //         console.log(res)
-        //         successNotification(res.data)
-        //         setisLoggedIn({
-        //             login: true,
-        //             authority: 'admin'
-        //         });
-        //         // if(res.status === 200) {
-        //         //     localStorage.setItem('isLoggedIn', true);
-        //         //     localStorage.setItem('authority', 'admin')
-        //         // }
-        //         navigate(DASHBOARD_LINK);
-        //     })
-        //     .catch(err => {
-        //         console.log(err)
-        //         errorNotification(err.response.data || err.response.data.error || err.message)
-        //     })
-        // } else {
-        //     errorNotification('Select any authority')
-        // }
     }
 
     return (
