@@ -16,7 +16,7 @@ public class MessageConstant {
 	
 	public static final String LOGOUT_USER_SUCCESS = "User successfully logged out";
 	
-	public static final String ADD_CONTACT_SUCCESS = "Contact added successfully";
+	public static final String ADD_PROJECT_SUCCESS = "Project added successfully";
 	
 	public static final String DELETE_SELECTED_CONTACTS_SUCCESS = "selected contacts were successfully deleted";
 	

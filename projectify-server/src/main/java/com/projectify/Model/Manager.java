@@ -42,7 +42,7 @@ public class Manager {
 				@Parameter(name = SequenceIdCodeGenerator.NUMBER_FORMATE_PARAMETER, value = "%05d")
 		}
 	)
-	private int managerCode;
+	private String managerCode;
 	
 	private String image;
 	

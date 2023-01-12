@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BASE_PATH, EMPLOYEE_LINK, CONTACT_US_LINK, PROJECTS_LINK, LOGIN_LINK, SIGNUP_LINK } from '../../routes/route';
 import NSElogo from '../../icon/NSE_Logo.svg';
 import HeaderMobileMenu from './HeaderMobileMenu';
 import { useDisclosure } from '@mantine/hooks';
 import { Image, createStyles, Header, HoverCard, Group, Button, Box, Burger } from '@mantine/core';
+import { getToken, removeToken } from '../../utils/localstorageItem';
 
 // import ThemeToggle from './ThemeToggles';
 
@@ -48,13 +49,15 @@ const useStyles = createStyles(theme => ({
 export default function HeaderMenu({isLoggedIn, setisLoggedIn}) {
     const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
     const { classes, theme } = useStyles();
+    const navigate = useNavigate();
 
-    const logoutHandle = () => setisLoggedIn({
-        login: false,
-        authority: ''
-    })
+
+    const logoutHandle = () => {
+        removeToken();
+        navigate(LOGIN_LINK);
+    }
     
-    console.log(isLoggedIn);
+    // console.log(isLoggedIn);
     return (
         <Box>
 
@@ -75,7 +78,7 @@ export default function HeaderMenu({isLoggedIn, setisLoggedIn}) {
                     </Group>
 
                     {
-                        isLoggedIn?.login
+                        getToken()
                         ? <Group className={`${classes.hiddenMobile}`}>
                             {/* <ThemeToggle/> */}
                             <Button onClick={() => logoutHandle()} variant="outline">Log out</Button>

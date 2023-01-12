@@ -22,6 +22,8 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -68,7 +70,7 @@ public class User implements UserDetails {
 	
 	private String designation;
 
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<UserRole> userRoles = new ArrayList<>();
 
@@ -91,7 +93,7 @@ public class User implements UserDetails {
 		// TODO Auto-generated method stub
 		Set<Authority> authorities = new HashSet<>();
 
-		this.userRoles.forEach(userRole -> {
+		userRoles.forEach(userRole -> {
 			authorities.add(new Authority(userRole.getRole().getRoleName()));
 		});
 

@@ -45,7 +45,7 @@ public class AuthenticateController {
 			}
 
 //			this.userDetailsServiceImpl.loadUserByUsername(jwtRequest.getUsername());
-			UserDetails userDetails = this.userDetailsServiceImpl.loadUserByUsername(jwtRequest.getUsername());
+			UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(jwtRequest.getUsername());
 			authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
 
 			String token = this.jwtUtils.generateToken(userDetails);

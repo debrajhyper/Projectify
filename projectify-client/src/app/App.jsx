@@ -2,15 +2,22 @@ import { useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { BASE_PATH, CONTACT_US_PATH, EMPLOYEE_PATH, MANAGER_PATH, LOGIN_PATH, PROJECTS_PATH, SIGNUP_PATH, DASHBOARD_PATH, NO_MATCH_PATH, FORGOT_PASSWORD_PATH, SIGNUP_LINK, LOGIN_LINK, EMPLOYEE_DETAILS_PATH } from '../routes/route';
+import { BASE_PATH, CONTACT_US_PATH, EMPLOYEE_PATH, MANAGER_PATH, LOGIN_PATH, PROJECTS_PATH, SIGNUP_PATH, DASHBOARD_PATH, NO_MATCH_PATH, FORGOT_PASSWORD_PATH, SIGNUP_LINK, LOGIN_LINK, EMPLOYEE_DETAILS_PATH, UNAUTHORIZED_PATH, ADMIN_DASHBOARD_PATH, MANAGER_DASHBOARD_PATH, EMPLOYEE_DASHBOARD_PATH } from '../routes/route';
 import './App.css';
 import { Footer, HeaderMenu } from '../components';
 import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
-import { Layout, RequireAuthPage, NoMatchFoundPage, HomePage, ProjectsPage, ManagerPage, EmployeePage, ContactUsPage, LoginPage, SignupPage, ForgotPasswordPage, DashboardPage } from '../pages';
+import { UnauthorizedPage, Layout, RequireAuthPage, NoMatchFoundPage, HomePage, ProjectsPage, ManagerPage, EmployeePage, ContactUsPage, LoginPage, SignupPage, ForgotPasswordPage, DashboardPage, AdminDashboardPage, ManagerDashboardPage, EmployeeDashboardPage } from '../pages';
 import { NotificationsProvider } from '@mantine/notifications';
 import EmployeeDetailsPage from '../pages/public/EmployeeDetailsPage';
+// import UnauthorizedPage from '../pages/UnauthorizedPage';
 
 const queryClient = new QueryClient();
+
+const ROLES = [
+  { authority: 'ADMIN' },
+  { authority: 'MANAGER' },
+  { authority: 'EMPLOYEE' }
+]
 
 function App() {
   const [colorScheme, setColorScheme] = useState('light');
@@ -55,9 +62,18 @@ function App() {
                   <Route path={LOGIN_PATH} element={<LoginPage setisLoggedIn={setisLoggedIn} />} />
                   <Route path={SIGNUP_PATH} element={<SignupPage />} />
                   <Route path={FORGOT_PASSWORD_PATH} element={<ForgotPasswordPage />} />
+                  <Route path={UNAUTHORIZED_PATH} element={<UnauthorizedPage/>}/>
 
-                  <Route element={<RequireAuthPage isLoggedIn={isLoggedIn} />}>
-                    <Route path={DASHBOARD_PATH} element={<DashboardPage />} />
+                  <Route element={<RequireAuthPage allowedRoles={[ROLES[0].authority]} />}>
+                    <Route path={ADMIN_DASHBOARD_PATH} element={<AdminDashboardPage/>} />
+                  </Route>
+
+                  <Route element={<RequireAuthPage allowedRoles={[ROLES[1].authority]} />}>
+                    <Route path={MANAGER_DASHBOARD_PATH} element={<ManagerDashboardPage/>} />
+                  </Route>
+
+                  <Route element={<RequireAuthPage allowedRoles={[ROLES[2].authority]} />}>
+                    <Route path={EMPLOYEE_DASHBOARD_PATH} element={<EmployeeDashboardPage/>} />
                   </Route>
 
                   <Route path={NO_MATCH_PATH} element={<NoMatchFoundPage />} />

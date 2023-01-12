@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.projectify.Constant.AppConstant;
 import com.projectify.Constant.ExceptionConstant;
 import com.projectify.Model.Admin;
+import com.projectify.Model.Employee;
+import com.projectify.Model.Manager;
 import com.projectify.Model.User;
 import com.projectify.Model.UserRole;
 import com.projectify.Repository.RoleRepository;
@@ -76,8 +78,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 					roleRepository.save(userRole.getRole());
 				}
 				
-//				user.setImage(AppConstant.DEFAULT_IMAGE);
 				user.getUserRoles().addAll(userRoles);
+				Manager manager = new Manager();
+					manager.setImage(AppConstant.DEFAULT_IMAGE);
+					manager.setUser(user);
+				user.setManager(manager);
 
 				this.userRepository.save(user);
 				System.out.println("SUCCESS =================== > REGISTERED MANAGER -> EMAIL : " + user.getEmail());
@@ -112,8 +117,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 					roleRepository.save(userRole.getRole());
 				}
 				
-//				user.setImage(AppConstant.DEFAULT_IMAGE);
 				user.getUserRoles().addAll(userRoles);
+				Employee employee = new Employee();
+					employee.setImage(AppConstant.DEFAULT_IMAGE);
+					employee.setUser(user);
+				user.setEmployee(employee);
 
 				this.userRepository.save(user);
 				System.out.println("SUCCESS =================== > REGISTERED EMPLOYEE -> EMAIL : " + user.getEmail());

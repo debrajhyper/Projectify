@@ -40,14 +40,19 @@ public class JwtUtils {
 
 	public String generateToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
-		return createToken(claims, userDetails.getUsername());
+		return createToken(claims, userDetails);
 	}
 
-	private String createToken(Map<String, Object> claims, String subject) {
+	private String createToken(Map<String, Object> claims, UserDetails userDetails) {
 
-		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+		return Jwts.builder()
+				.setClaims(claims)
+				.setSubject(userDetails.getUsername())
+				.claim("roles", userDetails.getAuthorities())
+				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + JwtConstant.EXPIRATION_TIME))
-				.signWith(SignatureAlgorithm.HS256, JwtConstant.SECRET_KEY).compact();
+				.signWith(SignatureAlgorithm.HS256, JwtConstant.SECRET_KEY)
+				.compact();
 	}
 
 	public Boolean validateToken(String token, UserDetails userDetails) {

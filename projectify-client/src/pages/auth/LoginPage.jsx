@@ -1,5 +1,6 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { DASHBOARD_LINK, FORGOT_PASSWORD_LINK, SIGNUP_LINK } from '../../routes/route';
+import { useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { ADMIN_DASHBOARD_LINK, DASHBOARD_LINK, EMPLOYEE_DASHBOARD_LINK, FORGOT_PASSWORD_LINK, MANAGER_DASHBOARD_LINK, SIGNUP_LINK } from '../../routes/route';
 import { TextInput, NumberInput, Select, PasswordInput, Checkbox, Anchor, Paper, Title, Text, Container, Group, Button } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import axios, { GENERATE_TOKEN } from '../../api/api';
@@ -9,6 +10,8 @@ import { request } from '../../utils/baseAxios';
 import { loginRequest } from '../../utils/authResquest';
 import { useMutation, useQuery } from 'react-query';
 import { setToken } from '../../utils/localstorageItem';
+import jwtDecode from 'jwt-decode';
+import useAuth from '../../hooks/useAuth';
 // const loginRequest = credentials => {
 //     return request({
 //         url: '/generate-token',
@@ -18,8 +21,28 @@ import { setToken } from '../../utils/localstorageItem';
 // }
 
 export default function LoginPage({setisLoggedIn}) {
+    const { auth, setAuth } = useAuth();
     const navigate = useNavigate();
-
+    const location = useLocation();
+    
+    const from = location.state?.form?.pathname || '/';
+    
+    useEffect(() => {
+        const goToPage = auth?.roles?.[0]?.authority
+        if(goToPage === 'ADMIN') {
+            navigate(ADMIN_DASHBOARD_LINK, { replace: true })
+        }
+        else if(goToPage === 'MANAGER') {
+            navigate(MANAGER_DASHBOARD_LINK, { replace: true })
+        }
+        if(goToPage === 'EMPLOYEE') {
+            navigate(EMPLOYEE_DASHBOARD_LINK, { replace: true })
+        }
+        // else {
+        //     navigate(form, { replace: true })
+        // }
+    }, [auth, navigate])
+    
     // const onSuccess = () => {
     //     console.log("success")
     // }
@@ -46,21 +69,26 @@ export default function LoginPage({setisLoggedIn}) {
         },
     });
 
-    const formSubmit = values => {
+    const formSubmit = async (values) => {
         // loadingNotification()
         const credentials = {
             username: values.email,
             password: values.password
         }
-        axios.post(GENERATE_TOKEN, credentials)
+        await axios.post(GENERATE_TOKEN, credentials)
         .then(res => {
-            console.log(res.data);
-            const isLoggedIn = setToken(res.data.token);
-            if(isLoggedIn) navigate(DASHBOARD_LINK);
+            console.log(res?.data);
+            const isLoggedIn = setToken(res?.data?.token);
+            const roles = jwtDecode(res.data.token).roles;
+            const email = jwtDecode(res.data.token).sub;
+            console.log(jwtDecode(res.data.token).sub, jwtDecode(res.data.token).roles[0].authority);
+            setAuth({email, roles, isLoggedIn})
+            
+            // if(isLoggedIn) navigate(DASHBOARD_LINK);
         })
         .catch(err => {
             console.log(err)
-            errorNotification(err.response.data.message || err.message)
+            errorNotification(err?.response?.data?.message || err.message)
         })
 
 

@@ -1,6 +1,6 @@
 import axios, { GENERATE_TOKEN } from '../api/api';
 
-export const loginRequest = async ({email, password}) => {
+export const loginRequest = async ({ email, password }) => {
     const credentials = {
         username: email,
         password: password

@@ -31,6 +31,7 @@ public class UserRole {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private User user;
 
+	@JsonIgnore
 	@ManyToOne
 	private Role role;
 
