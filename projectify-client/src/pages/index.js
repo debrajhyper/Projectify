@@ -8,6 +8,8 @@ export { default as AddEmployeePage } from './private/admin/AddEmployeePage';
 export { default as AddSkillPage } from './private/admin/AddSkillPage';
 
 export { default as ManagerDashboardPage } from './private/manager/ManagerDashboardPage';
+export { default as AddProjectPage } from './private/manager/AddProjectPage';
+export { default as ProjectCreatedPage } from './private/manager/ProjectsCreatedPage';
 
 export { default as EmployeeDashboardPage } from './private/employee/EmployeeDashboardPage';
 

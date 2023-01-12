@@ -20,7 +20,8 @@ export const ADD_EMPLOYEE_PATH = 'add-employee'
 export const ADD_SKILL_PATH = 'add-skill'
 
 export const MANAGER_DASHBOARD_PATH = 'manager-dashboard'
-
+export const ADD_PROJECT_PATH = 'add-project'
+export const PROJECTS_CREATED_PATH = 'projects-created'
 
 export const EMPLOYEE_DASHBOARD_PATH = 'employee-dashboard'
 
@@ -43,6 +44,8 @@ export const ADD_MANAGER_LINK = '/add-manager'
 export const ADD_SKILL_LINK = '/add-skill'
 
 export const MANAGER_DASHBOARD_LINK = '/manager-dashboard'
+export const ADD_PROJECT_LINK = '/add-project'
+export const PROJECT_CREATED_LINK = '/projects-created'
 
 
 export const EMPLOYEE_DASHBOARD_LINK = '/employee-dashboard'

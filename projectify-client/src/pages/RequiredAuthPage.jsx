@@ -11,7 +11,7 @@ const RequiredAuthPage = ({ allowedRoles }) => {
     const token = getToken();
     const { auth, user } = useAuth();
     
-    // console.log("Context provider -> ", auth, user);
+    console.log("Context provider -> ", auth, user);
     return ( 
         auth?.isLoggedIn && auth?.roles?.find(role => allowedRoles?.includes(role?.authority))?.authority
         ? <Outlet /> 

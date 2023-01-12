@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { PROJECTS_LINK, EMPLOYEE_LINK } from '../../routes/route';
-import ThemeToggles from '../Buttons/ThemeToggles';
 import { Title, Text, Container, Button, Overlay, createStyles } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
@@ -110,7 +109,7 @@ export default function HeroSection() {
             <Overlay color="#000" opacity={0.6} zIndex={1} />
             <div className={classes.inner}>
                 <div className={classes.ThemeToggler}>
-                    <ThemeToggles />
+                    {/* <ThemeToggles /> */}
                 </div>
 
                 <Title className={classes.title}>

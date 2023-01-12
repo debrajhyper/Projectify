@@ -1,12 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { BASE_PATH, EMPLOYEE_LINK, CONTACT_US_LINK, PROJECTS_LINK, LOGIN_LINK, SIGNUP_LINK } from '../../routes/route';
+import { BASE_PATH, EMPLOYEE_LINK, CONTACT_US_LINK, PROJECTS_LINK, LOGIN_LINK, SIGNUP_LINK, ADMIN_DASHBOARD_LINK, MANAGER_DASHBOARD_LINK, EMPLOYEE_DASHBOARD_LINK } from '../../routes/route';
 import NSElogo from '../../icon/NSE_Logo.svg';
 import HeaderMobileMenu from './HeaderMobileMenu';
 import { useDisclosure } from '@mantine/hooks';
 import { Image, createStyles, Header, HoverCard, Group, Button, Box, Burger } from '@mantine/core';
 import { getToken, removeToken } from '../../utils/localstorageItem';
 import useAuth from '../../hooks/useAuth';
-
+import ThemeToggle from '../Buttons/ThemeToggles';
 // import ThemeToggle from './ThemeToggles';
 
 const useStyles = createStyles(theme => ({
@@ -47,6 +47,12 @@ const useStyles = createStyles(theme => ({
     },
 }));
 
+const roleBasedDashboard = [
+    { authority: 'ADMIN', link: ADMIN_DASHBOARD_LINK },
+    { authority: 'MANAGER', link: MANAGER_DASHBOARD_LINK },
+    { authority: 'EMPLOYEE', link: EMPLOYEE_DASHBOARD_LINK }
+]
+
 export default function HeaderMenu({isLoggedIn, setisLoggedIn}) {
     const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
     const { classes, theme } = useStyles();
@@ -60,8 +66,7 @@ export default function HeaderMenu({isLoggedIn, setisLoggedIn}) {
         setUser();
         navigate(LOGIN_LINK);
     }
-    
-    // console.log(isLoggedIn);
+
     return (
         <Box>
 
@@ -74,25 +79,26 @@ export default function HeaderMenu({isLoggedIn, setisLoggedIn}) {
                     </div>
 
                     <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
+                        { 
+                            roleBasedDashboard?.map(dashboard => {
+                                const { authority, link } = dashboard
+                                return authority === auth?.roles?.[0]?.authority && <Link key={authority} to={link} className={classes.link}>Dashboard</Link> 
+                            })
+                        }
                         <Link to={PROJECTS_LINK} className={classes.link}>Projects</Link>
                         <Link to={EMPLOYEE_LINK} className={classes.link}>Employee</Link>
-                        {/* <Link to={MANAGER_LINK} className={classes.link}>Manager</Link> */}
                         {/* <Link to={EVENTS_LINK} className={classes.link}>Events</Link> */}
                         <Link to={CONTACT_US_LINK} className={classes.link}>Contact Us</Link>
                     </Group>
 
-                    {
-                        user
-                        ? <Group className={`${classes.hiddenMobile}`}>
-                            {/* <ThemeToggle/> */}
-                            <Button onClick={() => logoutHandle()} variant="outline">Log out</Button>
-                        </Group>
-                        : <Group className={`${classes.hiddenMobile}`}>
-                            {/* <ThemeToggle/> */}
-                            <Button component={Link} to={LOGIN_LINK} variant="outline">Log in</Button>
-                            {/* <Button component={Link} to={SIGNUP_LINK} variant='filled'>Sign up</Button> */}
-                        </Group>
-                    }
+                    <Group className={`${classes.hiddenMobile}`}>
+                        <ThemeToggle/>
+                        {
+                            user
+                            ? <Button onClick={() => logoutHandle()} variant="outline">Log out</Button>
+                            : <Button component={Link} to={LOGIN_LINK} variant="outline">Log in</Button>
+                        }
+                    </Group>
                     
 
                     <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />

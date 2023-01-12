@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { BASE_PATH, CONTACT_US_PATH, EMPLOYEE_PATH, MANAGER_PATH, LOGIN_PATH, PROJECTS_PATH, SIGNUP_PATH, DASHBOARD_PATH, NO_MATCH_PATH, FORGOT_PASSWORD_PATH, SIGNUP_LINK, LOGIN_LINK, EMPLOYEE_DETAILS_PATH, UNAUTHORIZED_PATH, ADMIN_DASHBOARD_PATH, MANAGER_DASHBOARD_PATH, EMPLOYEE_DASHBOARD_PATH, ADD_MANAGER_LINK, ADD_EMPLOYEE_LINK, ADD_SKILL_PATH, ADD_EMPLOYEE_PATH, ADD_MANAGER_PATH } from '../routes/route';
+import { BASE_PATH, CONTACT_US_PATH, EMPLOYEE_PATH, MANAGER_PATH, LOGIN_PATH, PROJECTS_PATH, SIGNUP_PATH, DASHBOARD_PATH, NO_MATCH_PATH, FORGOT_PASSWORD_PATH, SIGNUP_LINK, LOGIN_LINK, EMPLOYEE_DETAILS_PATH, UNAUTHORIZED_PATH, ADMIN_DASHBOARD_PATH, MANAGER_DASHBOARD_PATH, EMPLOYEE_DASHBOARD_PATH, ADD_MANAGER_LINK, ADD_EMPLOYEE_LINK, ADD_SKILL_PATH, ADD_EMPLOYEE_PATH, ADD_MANAGER_PATH, ADD_PROJECT_PATH, PROJECTS_CREATED_PATH } from '../routes/route';
 import './App.css';
 import { Footer, HeaderMenu } from '../components';
 import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
-import { UnauthorizedPage, Layout, RequireAuthPage, NoMatchFoundPage, HomePage, ProjectsPage, ManagerPage, EmployeePage, ContactUsPage, LoginPage, SignupPage, ForgotPasswordPage, DashboardPage, AdminDashboardPage, ManagerDashboardPage, EmployeeDashboardPage, AddManagerPage, AddEmployeePage, AddSkillPage } from '../pages';
+import { UnauthorizedPage, Layout, RequireAuthPage, NoMatchFoundPage, HomePage, ProjectsPage, ManagerPage, EmployeePage, ContactUsPage, LoginPage, SignupPage, ForgotPasswordPage, DashboardPage, AdminDashboardPage, ManagerDashboardPage, EmployeeDashboardPage, AddManagerPage, AddEmployeePage, AddSkillPage, AddProjectPage } from '../pages';
 import { NotificationsProvider } from '@mantine/notifications';
 import EmployeeDetailsPage from '../pages/public/EmployeeDetailsPage';
+import ProjectsCreatedPage from '../pages/private/manager/ProjectsCreatedPage';
 // import UnauthorizedPage from '../pages/UnauthorizedPage';
 
 const queryClient = new QueryClient();
@@ -73,6 +74,8 @@ function App() {
 
                   <Route element={<RequireAuthPage allowedRoles={[ROLES[1].authority]} />}>
                     <Route path={MANAGER_DASHBOARD_PATH} element={<ManagerDashboardPage/>} />
+                    <Route path={ADD_PROJECT_PATH} element={<AddProjectPage/>}/>
+                    <Route path={PROJECTS_CREATED_PATH} element={<ProjectsCreatedPage/>}/>
                   </Route>
 
                   <Route element={<RequireAuthPage allowedRoles={[ROLES[2].authority]} />}>
@@ -83,7 +86,7 @@ function App() {
                 </Route>
               </Routes>
               {
-                !location.pathname.includes(SIGNUP_LINK) && !location.pathname.includes(LOGIN_LINK) ? <Footer /> : null
+                // !location.pathname.includes(SIGNUP_LINK) && !location.pathname.includes(LOGIN_LINK) ? <Footer /> : null
               }
             </div>
           </NotificationsProvider>

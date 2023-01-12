@@ -45,15 +45,12 @@ public class AuthenticateController {
 				throw new BadCredentialsException("Missing email address or password");
 			}
 
-//			this.userDetailsServiceImpl.loadUserByUsername(jwtRequest.getUsername());
 			UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(jwtRequest.getUsername());
 			authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
 
 			String token = this.jwtUtils.generateToken(userDetails);
 			User user = userDetailsServiceImpl.loadByUsername(jwtRequest.getUsername());
 			
-
-//			return ResponseEntity.ok(new JwtResponse(token));
 			return new ResponseEntity<JwtResponse>(new JwtResponse(token, user), HttpStatus.OK);
 		} catch (UsernameNotFoundException e) {
 			// TODO: handle exception

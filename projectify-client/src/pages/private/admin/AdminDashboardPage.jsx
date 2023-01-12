@@ -13,7 +13,7 @@ const mockdata = [
 
 const useStyles = createStyles((theme) => ({
   card: {
-    // backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
   },
 
   title: {
@@ -53,12 +53,12 @@ const AdminDashboardPage = () => {
   ));
 
   return (
-    <Container size="sm" px="xs" mt='xl'>
+    <Container size="xs" px="xs" mt='xl'>
       <Card p="xl" className={classes.card}>
         <Group position="apart">
           <Text className={classes.title}>Welcome to Admin Page</Text>
         </Group>
-        <SimpleGrid cols={3} mt="md">
+        <SimpleGrid cols={3} mt="md" mb='md'>
           {items}
         </SimpleGrid>
       </Card>
