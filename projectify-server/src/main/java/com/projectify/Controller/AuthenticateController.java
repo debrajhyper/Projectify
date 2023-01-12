@@ -19,6 +19,7 @@ import com.projectify.Config.UserDetailsServiceImpl;
 import com.projectify.Constant.ExceptionConstant;
 import com.projectify.Model.JwtRequest;
 import com.projectify.Model.JwtResponse;
+import com.projectify.Model.User;
 
 @RestController
 @CrossOrigin("*")
@@ -49,9 +50,11 @@ public class AuthenticateController {
 			authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
 
 			String token = this.jwtUtils.generateToken(userDetails);
+			User user = userDetailsServiceImpl.loadByUsername(jwtRequest.getUsername());
+			
 
 //			return ResponseEntity.ok(new JwtResponse(token));
-			return new ResponseEntity<JwtResponse>(new JwtResponse(token), HttpStatus.OK);
+			return new ResponseEntity<JwtResponse>(new JwtResponse(token, user), HttpStatus.OK);
 		} catch (UsernameNotFoundException e) {
 			// TODO: handle exception
 			System.out.println("ERROR -> " + e.getMessage());

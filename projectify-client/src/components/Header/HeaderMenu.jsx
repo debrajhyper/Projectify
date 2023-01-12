@@ -51,12 +51,13 @@ export default function HeaderMenu({isLoggedIn, setisLoggedIn}) {
     const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
     const { classes, theme } = useStyles();
     const navigate = useNavigate();
-    const { auth, setAuth } = useAuth();
+    const { auth, setAuth, user, setUser } = useAuth();
 
 
     const logoutHandle = () => {
         removeToken();
-        setAuth({})
+        setAuth({});
+        setUser();
         navigate(LOGIN_LINK);
     }
     
@@ -81,7 +82,7 @@ export default function HeaderMenu({isLoggedIn, setisLoggedIn}) {
                     </Group>
 
                     {
-                        getToken()
+                        user
                         ? <Group className={`${classes.hiddenMobile}`}>
                             {/* <ThemeToggle/> */}
                             <Button onClick={() => logoutHandle()} variant="outline">Log out</Button>

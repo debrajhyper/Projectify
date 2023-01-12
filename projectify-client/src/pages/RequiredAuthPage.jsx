@@ -9,34 +9,9 @@ const RequiredAuthPage = ({ allowedRoles }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const token = getToken();
-    const { auth } = useAuth();
-
-    useEffect(() => {
-        if(auth?.isLoggedIn) {
-            axiosPrivate.get(CURRENT_USER)
-            .then(res => {
-                console.log(res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-        }
-    }, [auth?.isLoggedIn])
-
-    // useEffect(() => {
-    //     if(isLoggedIn) {
-    //         dispatch(getCurrentUser());
-    //     }
-    // }, [isLoggedIn, dispatch]);
+    const { auth, user } = useAuth();
     
-    // useEffect(() => {
-    //     if(!token) {
-    //         navigate(LOGIN_LINK)
-    //     } 
-    // }, [token]);
-
-    
-    console.log(auth);
+    // console.log("Context provider -> ", auth, user);
     return ( 
         auth?.isLoggedIn && auth?.roles?.find(role => allowedRoles?.includes(role?.authority))?.authority
         ? <Outlet /> 

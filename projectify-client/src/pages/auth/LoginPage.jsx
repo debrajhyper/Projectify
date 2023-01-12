@@ -12,20 +12,15 @@ import { useMutation, useQuery } from 'react-query';
 import { setToken } from '../../utils/localstorageItem';
 import jwtDecode from 'jwt-decode';
 import useAuth from '../../hooks/useAuth';
-// const loginRequest = credentials => {
-//     return request({
-//         url: '/generate-token',
-//         method: 'post',
-//         data: credentials
-//     })
-// }
 
-export default function LoginPage({setisLoggedIn}) {
-    const { auth, setAuth } = useAuth();
+export default function LoginPage() {
+    const { auth, setAuth, user, setUser } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    
     const comeFrom = location.state?.form?.pathname || '/';
+    function toUpperLower(text) {
+        return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
+    }
     
     useEffect(() => {
         const goToPage = auth?.roles?.[0]?.authority
@@ -62,8 +57,10 @@ export default function LoginPage({setisLoggedIn}) {
             const isLoggedIn = setToken(res?.data?.token);
             const roles = jwtDecode(res.data.token).roles;
             const email = jwtDecode(res.data.token).sub;
-            console.log(jwtDecode(res.data.token).sub, jwtDecode(res.data.token).roles[0].authority);
-            setAuth({email, roles, isLoggedIn}) 
+            // console.log(jwtDecode(res.data.token).sub, jwtDecode(res.data.token).roles[0].authority);
+            setAuth({email, roles, isLoggedIn})
+            setUser(res?.data?.user)
+            successNotification(`${toUpperLower(roles[0].authority)} Logged in Successfully`);
         })
         .catch(err => {
             console.log(err)

@@ -29,5 +29,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		
 		return user;
 	}
+	
+	public User loadByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		System.out.println("User Details Service Impl -> USER EMAIL : " + username);
+		User user = this.userRepository.findByUserName(username);
+		
+		if(user == null) {
+			System.out.println("Sorry, we couldn't find an account with that email address");
+			throw new UsernameNotFoundException(ExceptionConstant.USERNAME_NOT_FOUND);
+		}
+		
+		return user;
+	}
 
 }

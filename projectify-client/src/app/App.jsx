@@ -59,7 +59,7 @@ function App() {
                   <Route path={EMPLOYEE_PATH} element={<EmployeePage />} />
                   <Route path={EMPLOYEE_DETAILS_PATH} element={<EmployeeDetailsPage />} />
                   <Route path={CONTACT_US_PATH} element={<ContactUsPage />} />
-                  <Route path={LOGIN_PATH} element={<LoginPage setisLoggedIn={setisLoggedIn} />} />
+                  <Route path={LOGIN_PATH} element={<LoginPage/>} />
                   <Route path={SIGNUP_PATH} element={<SignupPage />} />
                   <Route path={FORGOT_PASSWORD_PATH} element={<ForgotPasswordPage />} />
                   <Route path={UNAUTHORIZED_PATH} element={<UnauthorizedPage/>}/>
