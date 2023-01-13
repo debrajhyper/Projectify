@@ -46,7 +46,7 @@ export default function LoginPage() {
     });
 
     const formSubmit = async (values) => {
-        loadingNotification()
+        loadingNotification();
         const credentials = {
             username: values.email,
             password: values.password
